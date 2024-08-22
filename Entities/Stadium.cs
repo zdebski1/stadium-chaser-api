@@ -2,6 +2,7 @@
 {
     public class Stadium
     {
-        public string stadiumname { get; set; }
+        public int StadiumId { get; set; }
+        public string StadiumName { get; set; }
     }
 }
