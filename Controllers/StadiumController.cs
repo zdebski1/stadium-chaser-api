@@ -7,11 +7,11 @@ namespace stadiumChaserApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StadiumsController : ControllerBase
+    public class StadiumController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public StadiumsController(AppDbContext context)
+        public StadiumController(AppDbContext context)
         {
             _context = context;
         }

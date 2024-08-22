@@ -9,11 +9,11 @@ namespace stadiumChaserApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VisitsController : ControllerBase
+    public class VisitController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public VisitsController(AppDbContext context)
+        public VisitController(AppDbContext context)
         {
             _context = context;
         }
