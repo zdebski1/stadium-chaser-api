@@ -19,7 +19,7 @@ namespace stadiumChaserApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Stadium>>> GetStadiums()
         {
-            var stadiums = await _context.Stadiums.ToListAsync();
+            var stadiums = await _context.Stadium.ToListAsync();
             return Ok(stadiums);
         }
     }
