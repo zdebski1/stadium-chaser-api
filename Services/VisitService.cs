@@ -45,7 +45,7 @@ namespace stadiumChaserApi.Services
         public async Task<Visit> GetVisitAsync(int visitId)
         {
             var visit = await _context.Visit
-                .FirstOrDefaultAsync(v => v.VisitId == visitId);
+                .FirstOrDefaultAsync(v => v.VisitId == visitId && v.IsDeleted == false);
 
             return visit;
         }

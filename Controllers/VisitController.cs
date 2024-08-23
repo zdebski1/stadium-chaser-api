@@ -39,7 +39,7 @@ namespace stadiumChaserApi.Controllers
             var visit = await _visitService.GetVisitAsync(id);
             if (visit == null)
             {
-                return NotFound();
+                return NotFound("Visit does not exist, Please try again.");
             }
 
             return Ok(visit);
