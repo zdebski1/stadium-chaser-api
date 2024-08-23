@@ -1,5 +1,4 @@
 ﻿using stadiumChaserApi.Entities;
-using System.Threading.Tasks;
 
 namespace stadiumChaserApi.Services.Interfaces
 {

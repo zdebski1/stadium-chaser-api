@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using stadiumChaserApi.Entities;
 using stadiumChaserApi.Services.Interfaces;
-using System.Threading.Tasks;
 
 namespace stadiumChaserApi.Controllers
 {

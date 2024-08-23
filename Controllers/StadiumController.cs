@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using stadiumChaserApi.Repositories;
 using stadiumChaserApi.Entities;
-using Microsoft.EntityFrameworkCore;
+using stadiumChaserApi.Services.Interfaces;
 
 namespace stadiumChaserApi.Controllers
 {
@@ -9,17 +8,17 @@ namespace stadiumChaserApi.Controllers
     [ApiController]
     public class StadiumController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IStadiumService _stadiumService;
 
-        public StadiumController(AppDbContext context)
+        public StadiumController(IStadiumService stadiumService)
         {
-            _context = context;
+            _stadiumService = stadiumService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Stadium>>> GetStadiums()
         {
-            var stadiums = await _context.Stadium.ToListAsync();
+            var stadiums = await _stadiumService.GetStadiumAsync();
             return Ok(stadiums);
         }
     }

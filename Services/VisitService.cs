@@ -2,8 +2,6 @@
 using stadiumChaserApi.Entities;
 using stadiumChaserApi.Repositories;
 using stadiumChaserApi.Services.Interfaces;
-using System;
-using System.Threading.Tasks;
 
 namespace stadiumChaserApi.Services
 {
