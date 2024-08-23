@@ -2,8 +2,7 @@
 using stadiumChaserApi.Entities;
 using stadiumChaserApi.Repositories;
 using stadiumChaserApi.Services.Interfaces;
-using System.ComponentModel;
-using System.Linq;
+using System;
 using System.Threading.Tasks;
 
 namespace stadiumChaserApi.Services
@@ -43,6 +42,14 @@ namespace stadiumChaserApi.Services
             await _context.SaveChangesAsync();
 
             return "Visit created successfully.";
+        }
+
+        public async Task<Visit> GetVisitAsync(int visitId)
+        {
+            var visit = await _context.Visit
+                .FirstOrDefaultAsync(v => v.VisitId == visitId);
+
+            return visit;
         }
     }
 }

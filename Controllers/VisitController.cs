@@ -33,5 +33,17 @@ namespace stadiumChaserApi.Controllers
 
             return Ok(result); 
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetVisit(int id)
+        {
+            var visit = await _visitService.GetVisitAsync(id);
+            if (visit == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(visit);
+        }
     }
 }
