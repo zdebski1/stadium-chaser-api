@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using stadiumChaserApi.Entities;
-using stadiumChaserApi.Repositories;
-using System.Security.Cryptography;
+using stadiumChaserApi.Services.Interfaces;
 using System.Threading.Tasks;
 
 namespace stadiumChaserApi.Controllers
@@ -11,11 +9,11 @@ namespace stadiumChaserApi.Controllers
     [ApiController]
     public class VisitController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IVisitService _visitService;
 
-        public VisitController(AppDbContext context)
+        public VisitController(IVisitService visitService)
         {
-            _context = context;
+            _visitService = visitService;
         }
 
         [HttpPost]
@@ -26,32 +24,14 @@ namespace stadiumChaserApi.Controllers
                 return BadRequest("A visit is required.");
             }
 
-            bool stadiumExists = await _context.Stadium.AnyAsync(s => s.StadiumId == visit.StadiumId);
-            if (!stadiumExists)
+            string result = await _visitService.CreateVisitAsync(visit);
+
+            if (result != "Visit created successfully.")
             {
-                var validStadiums = await _context.Stadium
-                    .Select(s => new { s.StadiumId, s.StadiumName })
-                    .ToListAsync();
-
-                var stadiumList = validStadiums
-                    .Select(s => $"{s.StadiumId} ({s.StadiumName})")
-                    .ToList();
-
-                return BadRequest($"Invalid StadiumId. Please use one of the following Ids: {string.Join(", ", stadiumList)}");
+                return BadRequest(result);
             }
 
-            visit.CreateBy = "ZDEBSKI"; // will be user authentication in the future
-            visit.CreateDate = DateTime.UtcNow;
-
-
-            visit.ModifyBy = null;
-            visit.ModifyDate = null;
-
-            _context.Visit.Add(visit);
-            await _context.SaveChangesAsync();
-
-            return StatusCode(200);
+            return Ok(result); 
         }
-
     }
 }
